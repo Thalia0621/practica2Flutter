@@ -81,7 +81,7 @@ class Profile extends StatefulWidget {
     final nombre= TextFormField(
       controller: etName,
       keyboardType: TextInputType.text,
-      decoration: InputDecoration(hintText: 'hintName',
+      decoration: InputDecoration(hintText: 'Name',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
       prefixIcon:  Padding(
@@ -94,7 +94,7 @@ class Profile extends StatefulWidget {
     final apellido= TextFormField(
       controller:etLastname,
       keyboardType: TextInputType.text,
-      decoration: InputDecoration(hintText: 'hintLastname',
+      decoration: InputDecoration(hintText: 'Lastname',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
       prefixIcon:  Padding(
@@ -107,7 +107,7 @@ class Profile extends StatefulWidget {
     final username= TextFormField(
       controller: etUsername,
       keyboardType: TextInputType.text,
-      decoration: InputDecoration(hintText: 'hintUserName',
+      decoration: InputDecoration(hintText: 'UserName',
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
       prefixIcon:  Padding(
@@ -274,15 +274,7 @@ class Profile extends StatefulWidget {
   data()async{
     print("************VALOR GUARDADO"+valorGuardado+"+*******************);");
     UserDAO _objUser= await _database.getUser(valorGuardado); 
-    if(_objUser==null){
-      print("Null");
-      hintUserName="Username";
-      hintName="Name";
-      hintLastname="LastName";
-      hintPassword="Password";
-      hintnumberPhone="Number Phone";
-      hintcurp="Curp";
-    }else{
+    if(_objUser!=null){
       print(_objUser.foto );
       
       imagePath=_objUser.foto;
