@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:practica2/src/screen/dashboard.dart';
+import 'package:practica2/src/screen/detail_movie.dart';
 import 'package:practica2/src/screen/favoritos.dart';
 import 'package:practica2/src/screen/login.dart';
 import 'package:practica2/src/screen/profile.dart';
 import 'package:practica2/src/screen/search.dart';
 import 'package:practica2/src/screen/trending.dart';
 import 'package:practica2/src/utils/shared_prefs.dart';
+import 'src/screen/splashscreen.dart';
 
 Future< void> main() async {
 WidgetsFlutterBinding.ensureInitialized();
@@ -32,9 +34,10 @@ class MyApp extends StatelessWidget
         '/favorites': (BuildContext context)=> Favorites(),      
         '/profile': (BuildContext context)=> Profile(),
         '/login':(BuildContext context)=>Login(), 
-        '/dashboard':(BuildContext context)=>Dashboard(),     
+        '/dashboard':(BuildContext context)=>Dashboard(), 
+        '/detail':(BuildContext context)=>DetailMovie() 
       },
-      home: Login(),
+      home: Splashscreen(),
     );
   }
 }
@@ -51,7 +54,8 @@ class SingInApp extends StatelessWidget
         '/search': (BuildContext context)=> Search(),
         '/favorites': (BuildContext context)=> Favorites(),      
         '/profile': (BuildContext context)=> Profile(),
-        '/login':(BuildContext context)=>Login(),      
+        '/login':(BuildContext context)=>Login(),  
+        '/detail':(BuildContext context)=>DetailMovie()     
       },
       home: Dashboard(),
     );

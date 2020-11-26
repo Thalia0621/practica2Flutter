@@ -33,7 +33,7 @@ class Trending extends StatefulWidget {
                  child: Text("Has error in this request :("),
               );
              }else if(snapshot.connectionState==ConnectionState.done){
-               return ListView();
+               return _listTrending(snapshot.data);
              }else{
                return Center(
                  child:CircularProgressIndicator(),
@@ -51,7 +51,7 @@ class Trending extends StatefulWidget {
           Result trending=movies[index];
           return CardTrending(trending: trending);
       },
-      itemCount: movies.length
+      itemCount: movies.length,
     );
   }
 }

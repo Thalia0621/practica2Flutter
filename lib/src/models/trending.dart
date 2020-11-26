@@ -21,6 +21,7 @@ class Result {
   String posterPath;
   int id;
   String backdropPath;
+  String originalTitle;
   String title;
   double voteAverage;
   String overview;
@@ -34,8 +35,9 @@ class Result {
       posterPath  : map['poster_path'],
       id          : map['id'],
       backdropPath: map['backdrop_path'],
+      originalTitle: map['original_title'],
       title       : map['title'],
-      voteAverage : map['vote_average'] is int?(map['vote_average']as int ).toDouble :  map['vote_average']  ,
+      voteAverage : map['vote_average'] is int?(map['vote_average']as int ).toDouble() :  map['vote_average']  ,
       overview    : map['overview'],
       releaseDate : map['release_date']     
     );
@@ -51,7 +53,8 @@ class Result {
     this.title,
     this.voteAverage,
     this.overview,
-    this.releaseDate,
+    this.releaseDate, 
+    this.originalTitle,
   });
 
   
