@@ -16,6 +16,7 @@ public final class GeneratedPluginRegistrant {
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     ShimPluginRegistry shimPluginRegistry = new ShimPluginRegistry(flutterEngine);
     flutterEngine.getPlugins().add(new io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin());
+      com.hoanglm.flutteryoutubeview.FlutterYoutubeViewPlugin.registerWith(shimPluginRegistry.registrarFor("com.hoanglm.flutteryoutubeview.FlutterYoutubeViewPlugin"));
     flutterEngine.getPlugins().add(new io.flutter.plugins.imagepicker.ImagePickerPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
       io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin.registerWith(shimPluginRegistry.registrarFor("io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin"));

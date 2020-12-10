@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' show Client;
 import 'package:practica2/src/models/trending.dart';
 class ApiMovies{

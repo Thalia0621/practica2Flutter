@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practica2/src/models/trending.dart';
+import 'package:practica2/src/utils/shared_prefs.dart';
 
 class CardTrending extends StatelessWidget{
   const CardTrending({
@@ -10,6 +11,7 @@ class CardTrending extends StatelessWidget{
   
   @override
   Widget build(BuildContext context) {
+    SharedPrefs sharedPrefs = SharedPrefs();
     return Container(
       margin:EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       decoration: BoxDecoration(
@@ -44,16 +46,18 @@ class CardTrending extends StatelessWidget{
                       child: Row(
                         children: <Widget>[
                             Text(trending.title,style: TextStyle(color: Colors.white,fontSize: 12.0),),
+                            Text(trending.voteCount.toString(),style: TextStyle(color: Colors.white,fontSize: 12.0),),
                             FlatButton(
                               padding: EdgeInsets.symmetric(horizontal:10.0),
-                              child:Icon(Icons.chevron_right),
-                              onPressed:(){
+                              child:Icon(Icons.info, color: Colors.white),
+                              onPressed:()async{
                                    Navigator.pushNamed(context,
                                    '/detail',arguments: {
-                                     'title':  trending.title,
-                                     'overview':trending.overview
+                                     'id'       : trending.id,
+                                     'title'    : trending.title,
+                                     'overview' : trending.overview
                                    });
-                                   
+                                   await sharedPrefs.setString("idMovie", trending.id.toString());
                               }
                             )
                         ],

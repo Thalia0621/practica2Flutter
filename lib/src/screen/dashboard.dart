@@ -7,9 +7,6 @@ import 'package:practica2/src/network/api_movies.dart';
 import 'package:practica2/src/screen/profile.dart';
 import 'package:practica2/src/utils/shared_prefs.dart';
 import 'dart:io';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
 class Dashboard extends StatelessWidget {
   const Dashboard({Key key}): super (key:key);
 

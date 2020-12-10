@@ -3,7 +3,7 @@ import 'package:practica2/src/models/trending.dart';
 import 'package:practica2/src/network/api_movies.dart';
 import 'package:practica2/src/views/card_trending.dart';
 
-
+ 
 class Trending extends StatefulWidget {
     const Trending({Key key}) : super(key: key);
 
@@ -12,7 +12,7 @@ class Trending extends StatefulWidget {
   }
   
   class _TrendingState extends State<Trending>{
-    ApiMovies apiMovies;
+  ApiMovies apiMovies;
   @override
   void initState(){
     super.initState();
