@@ -55,7 +55,8 @@ class CardTrending extends StatelessWidget{
                                    '/detail',arguments: {
                                      'id'       : trending.id,
                                      'title'    : trending.title,
-                                     'overview' : trending.overview
+                                     'overview' : trending.overview,
+                                     'backdropPath':trending.backdropPath
                                    });
                                    await sharedPrefs.setString("idMovie", trending.id.toString());
                               }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:practica2/src/models/favorites.dart';
 import 'package:practica2/src/models/userDAO.dart';
 import 'package:sqflite/sqflite.dart';
 //import 'package:path_provider_linux/path_provider_linux.dart';
@@ -25,13 +26,16 @@ class DataBaseHelper {
     return await openDatabase(
       rutaDB,
       version: _versionBD,
-      onCreate: _crearTablas
-    );
+      onCreate: _crearTablas,
+      
+    ); 
   }
     //Conexion a la BD y le version
   _crearTablas(Database db, int version)async{
     await db.execute("CREATE TABLE tbl_perfil(id INTEGER PRIMARY KEY,nombre varchar(25),apellido varchar(25),telefono varchar(10),email varchar(30),curp varchar(18),username varchar(30),password varchar(30),foto varchar(200))");
     //await db.execute("create....");  
+    await db.execute("CREATE TABLE tbl_favoritos(id INTEGER PRIMARY KEY,iduser INTEGER,idmovie INTEGER,title varchar(100),overview varchar(25),backdropPath varchar(50))");
+
   }
 
   Future<int> insertar(Map<String, dynamic> row, String tabla)async{
@@ -54,6 +58,22 @@ class DataBaseHelper {
     var result= await dbClient.query('tbl_perfil',where: 'email=?', whereArgs: [mailUser]);
     //MAPEO
     var lista=(result).map((item) => UserDAO.fromJSON(item)).toList();
+     return lista.length>0?lista[0]:null;
+  }
+
+   Future<FavoritesDAO> getallFavorites(int iduser)async{
+    var dbClient=await database;
+    var result= await dbClient.query('tbl_favoritos',where: 'iduser=?', whereArgs: [iduser]);
+    //MAPEO
+    var lista=(result).map((item) => FavoritesDAO.fromJSON(item)).toList();
+     return lista.length>0?lista[0]:null;
+  }
+
+  Future<FavoritesDAO> getFavorita(int iduser, int idmovie)async{
+    var dbClient=await database;
+    var result= await dbClient.query('tbl_favoritos',where: 'iduser=? and idmovie=?', whereArgs: [iduser,idmovie]);
+    //MAPEO
+    var lista=(result).map((item) => FavoritesDAO.fromJSON(item)).toList();
      return lista.length>0?lista[0]:null;
   }
  
