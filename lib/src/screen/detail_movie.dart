@@ -4,7 +4,7 @@ import 'package:practica2/src/databases/database_helper.dart';
 import 'package:practica2/src/models/credit.dart';
 import 'package:practica2/src/models/favorites.dart';
 import 'package:practica2/src/network/api_credit.dart';
-//import 'package:toast/toast.dart';
+import 'package:toast/toast.dart';
 //import 'package:video_player/video_player.dart';
 import 'package:practica2/src/network/api_videos.dart';
 import 'package:flutter_youtube_view/flutter_youtube_view.dart';
@@ -56,8 +56,25 @@ class _DetailMovieState extends State<DetailMovie> {
           IconButton(
             icon: const Icon(Icons.favorite,color: Colors.pink,),
             tooltip: 'Show Snackbar',
-            onPressed: (){ 
-               
+            onPressed: ()async{ 
+              FavoritesDAO favoritesDAO=FavoritesDAO(
+                iduser: 1,
+                idmovie: movie['id'],
+                title: movie['title'],
+                overview: movie['overview'],
+                backdropPath:movie['backdropPath']
+              );
+
+              FavoritesDAO objFav=await db.getFavorita(1, movie['id']);
+              if(objFav==null){
+                db.insertar(favoritesDAO.toJSON(),'tbl_favoritos').then((rows)=>{print('$rows')});
+                Toast.show("Added to favorites", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+              }else{
+                favoritesDAO.id=objFav.id;
+                db.eliminar(favoritesDAO.id, 'tbl_favoritos');
+                 Toast.show("Removed of favorites", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+
+              }
             },
           ),
           ],

@@ -61,12 +61,12 @@ class DataBaseHelper {
      return lista.length>0?lista[0]:null;
   }
 
-   Future<FavoritesDAO> getallFavorites(int iduser)async{
+   Future<List<FavoritesDAO>> getallFavorites(int iduser)async{
     var dbClient=await database;
     var result= await dbClient.query('tbl_favoritos',where: 'iduser=?', whereArgs: [iduser]);
     //MAPEO
     var lista=(result).map((item) => FavoritesDAO.fromJSON(item)).toList();
-     return lista.length>0?lista[0]:null;
+     return lista;
   }
 
   Future<FavoritesDAO> getFavorita(int iduser, int idmovie)async{

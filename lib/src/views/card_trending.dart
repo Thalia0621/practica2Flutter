@@ -46,7 +46,7 @@ class CardTrending extends StatelessWidget{
                       child: Row(
                         children: <Widget>[
                             Text(trending.title,style: TextStyle(color: Colors.white,fontSize: 12.0),),
-                            Text(trending.voteCount.toString(),style: TextStyle(color: Colors.white,fontSize: 12.0),),
+                            //Text(trending.voteCount.toString(),style: TextStyle(color: Colors.white,fontSize: 12.0),),
                             FlatButton(
                               padding: EdgeInsets.symmetric(horizontal:10.0),
                               child:Icon(Icons.info, color: Colors.white),
