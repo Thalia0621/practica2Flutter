@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:practica2/src/databases/database_helper.dart';
 import 'package:practica2/src/models/credit.dart';
 import 'package:practica2/src/models/favorites.dart';
+import 'package:practica2/src/models/userDAO.dart';
 import 'package:practica2/src/network/api_credit.dart';
+import 'package:practica2/src/utils/shared_prefs.dart';
 import 'package:toast/toast.dart';
 //import 'package:video_player/video_player.dart';
 import 'package:practica2/src/network/api_videos.dart';
@@ -23,6 +25,7 @@ class DetailMovie extends StatefulWidget {
 
 class _DetailMovieState extends State<DetailMovie> {
   ApiVideos apiVideos=ApiVideos();
+  SharedPrefs sharedPrefs= SharedPrefs();
   ApiCredits apicredits;
   DataBaseHelper db;
   Future<List<Credit>> _listCast;
@@ -65,16 +68,25 @@ class _DetailMovieState extends State<DetailMovie> {
                 backdropPath:movie['backdropPath']
               );
 
-              FavoritesDAO objFav=await db.getFavorita(1, movie['id']);
-              if(objFav==null){
+             
+            
+             String email=await sharedPrefs.getString('email');
+              UserDAO user=await db.getUser(email);
+             if(user==null){
+                   Toast.show("You need sing in", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+             }else{
+                FavoritesDAO objFav=await db.getFavorita(user.id, movie['id']);
+               if(objFav==null){
                 db.insertar(favoritesDAO.toJSON(),'tbl_favoritos').then((rows)=>{print('$rows')});
                 Toast.show("Added to favorites", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
               }else{
                 favoritesDAO.id=objFav.id;
                 db.eliminar(favoritesDAO.id, 'tbl_favoritos');
                  Toast.show("Removed of favorites", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-
               }
+             }
+          
+              
             },
           ),
           ],

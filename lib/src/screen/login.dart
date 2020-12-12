@@ -93,7 +93,8 @@ class _LoginState extends State<Login> {
         print(txtUser.text);
         await sharedPrefs.setString("email", txtUser.text);
         if(checked.value)
-        await sharedPrefs.setString("token", "user"); //Guarda la clave y su valor
+        await sharedPrefs.setString("token", "user");//Guarda la clave y su valor
+           
           Navigator.pop(context);
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Dashboard())); 
       }//Async
